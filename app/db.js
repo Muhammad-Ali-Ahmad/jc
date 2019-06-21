@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//const Message = require('./schemas/courses');
+const Message = require('./schemas/jcSchemas');
 
 module.exports.connect = () => {
     mongoose.connect('mongodb://localhost/jc', { useNewUrlParser: true });
@@ -12,8 +12,8 @@ module.exports.connect = () => {
         process.exit(1);
     });
     db.once('open', () => {
-        // let msg = new Message()
-        // msg.save()
+        let msg = new Message()
+        msg.save()
         console.log('JC DB Opened');
     });
 };

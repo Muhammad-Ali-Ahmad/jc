@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const path = require('path');
 const db = require('./db');
 
-// const api = require('./routes/api');
+ const api = require('./routes/routes');
 
 
 const env = process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
@@ -14,13 +14,14 @@ const port = 3030;
 app.use(bodyParser.json());
 app.use(morgan('combined'));
 app.use(cors({ origin: '*' }));
-const staticDir = path.join(__dirname, '../dist/');
+const staticDir = path.join(__dirname, '../src/');
 
 const htmlFile = path.join(staticDir, 'index.html');
 console.log('Serving contents of ', staticDir);
 app.use(express.static(staticDir));
-// app.use('/api', api);
+app.use('/api', api);
 app.use('/', (req, res) => res.sendFile(htmlFile));
 app.listen(port);
 console.log(`Listening on port ${port} ...`);
 db.connect();
+
