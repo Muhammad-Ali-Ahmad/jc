@@ -20,7 +20,7 @@ router.get('/getMessage', async (req, res) => {
     }
 });
 
-router.get('/getMessageById', async (req, res) => {
+router.get('/getMessageById', (req, res) => {
     Message.findOne({_id: req.query.id}, (err, messageDoc) => {
         if (err) {
             console.error('/getMessageById -> ', err);
@@ -28,6 +28,17 @@ router.get('/getMessageById', async (req, res) => {
         }
         console.log('/getMessageById -> ', messageDoc);
         res.json(new jcDTO(messageDoc));
+    });
+});
+
+router.post('/addExperience', (req, res) => {
+    Message.addExperience(req.body.message, (err, messageDoc) => {
+        if (err) {
+            console.error('/addExperience -> ', err);
+            throw (err);
+        }
+        console.log('/addExperience -> ', messageDoc);
+        res.json();
     });
 });
 

@@ -14,6 +14,12 @@ jcSchema.statics.findById = function(id, cb) {
     return this.find({ _id: id}, cb);
 }
 
+jcSchema.statics.addExperience = function(message, cb) {
+    this.create({
+        message: message
+    }, cb);
+}
+
 const Message = mongoose.model('experience', jcSchema);
 
 module.exports=Message

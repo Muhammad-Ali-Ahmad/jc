@@ -1,4 +1,30 @@
-<p>
-  experience works!
-</p>
-<p>message: {{experience?.message}}</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Message</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let exp of experience">
+      <td>{{exp.id}}</td>
+      <td>{{exp.message}}</td>
+      <td><a [routerLink]="['/experience/details/', exp.id]"><button class="btn btn-primary">View</button></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-success" (click)="addNewExp()">Add New</button>
+<br/>
+<ng-container *ngIf="toggle">
+    <br/>
+    <br/>
+        <form class="form-inline" #createExp="ngForm" (ngSubmit)="submitNewExp(createExp.value)">
+            <div class="form-group mb-2">
+                <label for="courseName">Experience</label>
+                <input type="text" class="form-control" name="message" ngModel>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
+</ng-container>

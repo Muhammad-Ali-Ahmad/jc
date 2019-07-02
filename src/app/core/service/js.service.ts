@@ -17,4 +17,8 @@ export class JsService {
   getMessageById(id: string): Observable<Experience[]> {
     return this.http.get<Experience[]>(`${this.url}/getMessageById`, { params: {id}});
   }
+
+  addExperience(experience: Experience) {
+    return this.http.post(`${this.url}/addExperience`, experience);
+  }
 }
